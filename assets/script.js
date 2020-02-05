@@ -1,5 +1,6 @@
 // variables to manipulate the DOM
-var startButton = document.getElementById("start-button")
+var startButton = document.getElementById("start-button");
+var nextButton = document.getElementById("next-button");
 var startTextDiv = document.querySelector(".start-text")
 var questionContainer = document.getElementById("question-container");
 var questionEl = document.getElementById("question");
@@ -7,11 +8,17 @@ var answerButtonsEl = document.getElementById("answer-buttons")
 var timer = document.getElementById("timer");
 var score = document.getElementById("score");
 
+
 // event listener section
 startButton.addEventListener("click", startGame);
+nextButton.addEventListener("click", function (){
+    currentQuestionIndex++
+    setNextQuestion();
+})
+
 
 // undefined variables for later use. 
-var shuffledQuestions, currentQuestionIndex
+var shuffledQuestions, currentQuestionIndex, answer
 
 // function that will run when I begin the game by clicking on the start button.
 function startGame() {
@@ -34,27 +41,40 @@ var intervalId = setInterval(function() {
 
     if (secondsLeft === 0) {
         clearInterval(intervalId);
-        console.log("game over")
+        
     }
 },1000);
 }
 
 function setNextQuestion() {
-    getNextQuestion(shuffledQuestions[currentQuestionIndex])
+    resetState();
+    getNextQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
-// function to get the next question from the question array
+// function to get the next question from the question array & populate the answers button div. 
 function getNextQuestion(question) {
     questionEl.innerText = question.question
-    question.answers.forEach(answer => {
-        var button = document.createElement("button")
-        button.innerText = answer.text
-        button.classList.add("btn")
-        answerButtonsEl.appendChild(button);
+    question.answers.forEach(answers => {
+        var button = document.createElement("button");
+        button.innerText = answers.text;
+        button.classList.add("btn");
+        button.addEventListener("click", selectAnswer);
+        answerButtonsEl.appendChild(button); 
         
     });
-    
 }
+// resetting the questions and next button each time a question is rendered in the question container. 
+function resetState() {
+    nextButton.classList.add("hide");
+    while(answerButtonsEl.firstChild) {
+        answerButtonsEl.removeChild(answerButtonsEl.firstChild)
+    }
+}
+
+function selectAnswer () {
+    nextButton.classList.remove("hide");
+}
+
 
 // array of objects filled with questions and answers.  
 var questions = [
@@ -65,41 +85,46 @@ var questions = [
             {text: "<scripting>", correct: false},
             {text: "<script>", correct: true},
             {text: "<javascript>", correct: false}
-        ]
+        ],
+        
     },
     {
         question: "Which of the following types of variables is visible everywhere in your JavaScript Code?",
-        answer: [
-            {text:"global variable", correct:true},
-            {text:"local variable", correct:false},
-            {text: "regional variable",correct:false},
-            {text:"national variable", correct:false}
-        ]
+        answers: [
+            {text:"global variable"},
+            {text:"local variable"},
+            {text: "regional variable"},
+            {text:"national variable"}
+        ],
+        correct: "global variable"
     },
     {
         question: "Which of the following function of Array object adds one or more elements to the end of an array and returns the new length of the array?",
-        answer: [
-            {text: "last()", correct: false },
-            {text: "put()", correct: false},
-            {text: "push()", correct: true},
-            {text: "None of the above", correct: false}
-        ]
+        answers: [
+            { text: "last()"},
+            { text: "put()"},
+            { text: "push()"},
+            { text: "None of the above"}
+        ],
+     
     },
     {
         question: "Which of the following is an advantage of using JavaScript?",
-        answer: [
-            {text:"Increased interactivity.", correct: false},
-            {text:" Less server interaction.", correct: false},
-            {text:"Immediate feedback from the users.", correct: false },
-            {text:"All of the above.", correct: true }
-        ]
+        answers: [
+            {text: "Increased interactivity."},
+            {text: "Less server interaction."},
+            {text: "Immediate feedback from the users."},
+            {text: "All of the above."}
+        ],
+        
     }, {
         question: "How is the function called in JavaScript?",
-        answer:[
-            {text: "call iloveponies();", correct: false},
-            {text: "call function iloveponies();", correct: false },
-            {text: "iloveponies();", correct: true },
-            {text: "function iloveponies()", correct: false}
-        ]
+        answers:[
+            {text: "call iloveponies();"},
+            {text: "call function iloveponies();"},
+            {text: "iloveponies();"},
+            {text: "function iloveponies()"}
+        ],
+        
     }
 ]
