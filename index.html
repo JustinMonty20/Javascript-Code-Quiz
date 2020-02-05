@@ -7,12 +7,20 @@
     <title>JavaScript Code Quiz</title>
     <link rel="stylesheet" href="./assets/style.css">
     <nav>
-        <h4 id = "timer">Time:</h4>
+        <h4>Score: <span id = "score">0</span></h4>
+        <h4>Time: <span id = "timer"></span></h4>
     </nav>
 </head>
 <body>
+    <div class="start-text">
+        <h2>JavaScript Code Quiz</h2>
+        <h4>Press the Start button to begin.</h4>
+        <h4>Try and answer as many questions as you can within the time limit.</h4>
+        <h4>Save your score at the end!</h4>
+    </div>
     
  <div class="container">
+    
      <div id="question-container" class = "hide">
          <div id="question">Question</div>
          <div id="answer-buttons" class = "button-grid">
@@ -21,19 +29,12 @@
              <button class="btn">Answer 3</button>
              <button class="btn">Answer 4</button>
          </div>
-         <div class="control">
-             <button id = "start-button" class= "btn hide">Start</button>
-        </div>
      </div>
- </div>
     
-
-
-
-
-
-
-
+     <div class="control">
+        <button id = "start-button" class= "btn">Start</button>
+   </div>
+   </div>
 <script src = "./assets/script.js"></script>
 </body>
 </html>
