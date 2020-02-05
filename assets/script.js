@@ -7,7 +7,10 @@ var answerButtonsEl = document.getElementById("answer-buttons")
 var timer = document.getElementById("timer");
 var score = document.getElementById("score");
 
-// undefined
+// event listener section
+startButton.addEventListener("click", startGame);
+
+// undefined variables for later use. 
 var shuffledQuestions, currentQuestionIndex
 
 // function that will run when I begin the game by clicking on the start button.
@@ -43,17 +46,18 @@ function setNextQuestion() {
 // function to get the next question from the question array
 function getNextQuestion(question) {
     questionEl.innerText = question.question
+    question.answers.forEach(answer => {
+        var button = document.createElement("button")
+        button.innerText = answer.text
+        button.classList.add("btn")
+        answerButtonsEl.appendChild(button);
+        
+    });
     
 }
 
-
-
-
-// event listener section
-startButton.addEventListener("click", startGame);
-
-
-const questions = [
+// array of objects filled with questions and answers.  
+var questions = [
     {
         question: "Inside which HTML element do we put JS?",
         answers: [
@@ -66,7 +70,7 @@ const questions = [
     {
         question: "Which of the following types of variables is visible everywhere in your JavaScript Code?",
         answer: [
-            {text:"global variable", correct: true},
+            {text:"global variable", correct:true},
             {text:"local variable", correct:false},
             {text: "regional variable",correct:false},
             {text:"national variable", correct:false}
