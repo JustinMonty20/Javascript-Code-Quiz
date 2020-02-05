@@ -118,7 +118,7 @@ var questions = [
         ],
         
     }, {
-        question: "How is the function called in JavaScript?",
+        question: "How is a function called in JavaScript?",
         answers:[
             {text: "call iloveponies();"},
             {text: "call function iloveponies();"},
