@@ -84,12 +84,12 @@ function selectAnswer(e) {
   var correct = selectedButton.dataset.correct
   if (correct) {
       alert("Correct!")
+      score.innerText = Number(score.innerText) + 1
   } else {
       alert("Wrong!")
-     
+      console.log(timer.textContent)
   }
 }
-
 
 // array of objects filled with questions and answers.  
 var questions = [
@@ -143,3 +143,8 @@ var questions = [
 
     }
 ]
+
+// console.log(questions[0].answers[0].text)
+// console.log(questions[3].answers[2].correct)
+// console.log(questions[4].answers[3].text)
+
