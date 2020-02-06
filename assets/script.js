@@ -87,7 +87,13 @@ function selectAnswer(e) {
       score.innerText = Number(score.innerText) + 1
   } else {
       alert("Wrong!")
-      console.log(timer.textContent)
+      
+  }
+  if(shuffledQuestions.length > currentQuestionIndex + 1) {
+      nextButton.classList.remove("hide")
+  } else {
+      startButton.innerText = "Restart"
+      startButton.classList.remove("hide");
   }
 }
 
