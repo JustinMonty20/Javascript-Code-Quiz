@@ -21,14 +21,14 @@ nextButton.addEventListener("click", function () {
 
 
 // undefined variables for later use.
-var myQuestions, currentQuestionIndex
+var myQuestion, currentQuestionIndex
 
 // function that will run when I begin the game by clicking on the start button.
 function startGame() {
     startTextDiv.classList.add("hide");
     startButton.classList.add("hide");
     questionContainer.classList.remove("hide");
-    myQuestions = questions.sort();
+    myQuestion = questions.sort();
     currentQuestionIndex = 0;
 
     setTime();
@@ -93,7 +93,7 @@ nextButton.classList.remove("hide");
       secondsLeft = secondsLeft - 5;
       
   }
-  if(myQuestions.length > currentQuestionIndex + 1) {
+  if(myQuestion.length > currentQuestionIndex + 1) {
       nextButton.classList.remove("hide")
   } else {
       startButton.innerText = "Restart"
