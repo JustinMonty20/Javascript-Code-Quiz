@@ -7,6 +7,8 @@ var questionEl = document.getElementById("question");
 var answerButtonsEl = document.getElementById("answer-buttons")
 var timer = document.getElementById("timer");
 var score = document.getElementById("score");
+var secondsLeft; 
+
 
 
 // event listener section
@@ -18,15 +20,15 @@ nextButton.addEventListener("click", function () {
 });
 
 
-// undefined variables for later use. 
-var shuffledQuestions, currentQuestionIndex
+// undefined variables for later use.
+var myQuestions, currentQuestionIndex
 
 // function that will run when I begin the game by clicking on the start button.
 function startGame() {
     startTextDiv.classList.add("hide");
     startButton.classList.add("hide");
     questionContainer.classList.remove("hide");
-    shuffledQuestions = questions.sort();
+    myQuestions = questions.sort();
     currentQuestionIndex = 0;
 
     setTime();
@@ -58,7 +60,7 @@ function resetState() {
 // function to set the next question of the quiz into the container. 
 function setNextQuestion() {
     resetState();
-    getNextQuestion(shuffledQuestions[currentQuestionIndex]);
+    getNextQuestion(myQuestions[currentQuestionIndex]);
 }
 
 // function to get the next question from the question array & populate the answers button div. 
@@ -79,21 +81,24 @@ function getNextQuestion(question) {
 
 // callback function for the button event listener. 
 function selectAnswer(e) {
-    nextButton.classList.remove("hide");
+nextButton.classList.remove("hide");
   var selectedButton = e.target
   var correct = selectedButton.dataset.correct
+
   if (correct) {
       alert("Correct!")
       score.innerText = Number(score.innerText) + 1
   } else {
       alert("Wrong!")
+      secondsLeft = secondsLeft - 5;
       
   }
-  if(shuffledQuestions.length > currentQuestionIndex + 1) {
+  if(myQuestions.length > currentQuestionIndex + 1) {
       nextButton.classList.remove("hide")
   } else {
       startButton.innerText = "Restart"
       startButton.classList.remove("hide");
+      
   }
 }
 
