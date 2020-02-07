@@ -7,10 +7,13 @@ var questionEl = document.getElementById("question");
 var answerButtonsEl = document.getElementById("answer-buttons");
 var timer = document.getElementById("timer");
 var score = document.getElementById("score");
+var submission = document.getElementById("submit-form");
+
 var secondsLeft = 60;
 
+
 // undefined variables for later use.
-var myQuestion, currentQuestionIndex
+var myQuestion, currentQuestionIndex, intervalId
 
 // event listeners
 startButton.addEventListener("click", startGame);
@@ -23,7 +26,7 @@ nextButton.addEventListener("click", function () {
 // Functions to generate right and wrong text depending on the users choice. 
 function displayCorrectMessage() {
     startTextDiv.style.fontSize = "50px";
-    startTextDiv.textContent = "Correct!"
+    startTextDiv.textContent = "Correct!";
     startTextDiv.classList.remove("hide");
 
     setTimeout(function () {
@@ -33,17 +36,12 @@ function displayCorrectMessage() {
 
 function displayWrongMessage() {
     startTextDiv.style.fontSize = "50px";
-    startTextDiv.textContent = "Wrong!"
+    startTextDiv.textContent = "Wrong!";
     startTextDiv.classList.remove("hide");
 
     setTimeout(function () {
         startTextDiv.classList.add("hide");
     }, 1000)
-}
-
-function createSubmitForm() {
-    var submitForm = document.createElement = "form"
-
 }
 
 // function that will run when I begin the game by clicking on the start button.
@@ -56,19 +54,16 @@ function startGame() {
 
     setTime();
     setNextQuestion();
-}
-
-
-
+};
 // function to set the time interval. 
 function setTime() {
-    var intervalId = setInterval(function () {
+        intervalId = setInterval(function () {
         secondsLeft--;
         timer.textContent = secondsLeft;
 
         if (secondsLeft === 0) {
             clearInterval(intervalId);
-        }
+        } 
     }, 1000);
 }
 
@@ -119,11 +114,24 @@ function selectAnswer(e) {
         nextButton.classList.remove("hide")
     } else {
         score.textContent = secondsLeft;
+        nextButton.classList.add("hide");
         startButton.innerText = "Restart";
         startButton.classList.remove("hide");
-        createSubmitForm()
     }
 }
+
+
+// function clearAll() {
+//     score.textContent = ""
+//     timer.textContent = ""
+// }
+// this function should dynamically create a form where the user can place their initials.  
+// function createSubmitForm() {
+//     var submitForm = document.createElement("form") 
+//     console.log(submitForm);
+
+// }
+
 
 
 // console.log(questions[0].answers[0].text)
