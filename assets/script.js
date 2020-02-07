@@ -1,6 +1,5 @@
 // variables to manipulate the DOM
 var startButton = document.getElementById("start-button");
-var nextButton = document.getElementById("next-button");
 var startTextDiv = document.querySelector(".start-text")
 var questionContainer = document.getElementById("question-container");
 var questionEl = document.getElementById("question");
@@ -17,11 +16,6 @@ var myQuestion, currentQuestionIndex, intervalId
 
 // event listeners
 startButton.addEventListener("click", startGame);
-
-nextButton.addEventListener("click", function () {
-    currentQuestionIndex++
-    setNextQuestion();
-});
 
 // Functions to generate right and wrong text depending on the users choice. 
 function displayCorrectMessage() {
@@ -69,7 +63,6 @@ function setTime() {
 
 // resetting the questions and next button each time a question is rendered in the question container. 
 function resetState() {
-    nextButton.classList.add("hide");
     while (answerButtonsEl.firstChild) {
         answerButtonsEl.removeChild(answerButtonsEl.firstChild)
     }
@@ -99,7 +92,6 @@ function getNextQuestion(question) {
 
 // callback function for the button event listener. 
 function selectAnswer(e) {
-    nextButton.classList.remove("hide");
     var selectedButton = e.target
     var correct = selectedButton.dataset.correct
 
@@ -111,10 +103,10 @@ function selectAnswer(e) {
     }
 
     if (myQuestion.length > currentQuestionIndex + 1) {
-        nextButton.classList.remove("hide")
+        currentQuestionIndex++
+        setNextQuestion();
     } else {
         score.textContent = secondsLeft;
-        nextButton.classList.add("hide");
         startButton.innerText = "Restart";
         startButton.classList.remove("hide");
     }
