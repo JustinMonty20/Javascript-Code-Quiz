@@ -1,5 +1,7 @@
 
+![](./screen-shots/CodeQuiz1.png)
 
+![](./screen-shots/CodeQuiz2.png)
 
 JavaScript Code Quiz.
 
@@ -15,4 +17,5 @@ JavaScript Code Quiz.
 
 6. A form field is supposed to pop up where you can enter your initals and set the high score. 
 
-
+Here is the link to my deployed site on GitHub Pages
+https://justinmonty20.github.io/Javascript-Code-Quiz/
